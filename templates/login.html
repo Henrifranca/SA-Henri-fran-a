@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <!-- Define a codificação de caracteres e permite a adaptação para dispositivos móveis. -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Título exibido na aba do navegador. -->
+    <title>Login • MedCore</title>
+
+    <!-- Carrega a fonte Inter para melhorar a apresentação dos textos. -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Disponibiliza os ícones utilizados na tela de acesso. -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Carrega o arquivo CSS responsável pela aparência do sistema. -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<!-- Centraliza o formulário de login na tela e aplica a cor de fundo definida no CSS. -->
+<body style="display: flex; align-items: center; justify-content: center; height: 100vh; background: var(--sidebar-bg);">
+
+    <!-- Cartão principal que reúne os elementos de identificação e acesso. -->
+    <div class="card" style="width: 100%; max-width: 400px; padding: 30px;">
+
+        <!-- Apresentação visual e identificação do sistema MedCore. -->
+        <div style="text-align: center; margin-bottom: 24px;">
+
+            <!-- Ícone que representa a área da saúde. -->
+            <i class="fa-solid fa-heart-pulse" style="font-size: 2.5rem; color: var(--primary);"></i>
+
+            <!-- Nome exibido no cabeçalho da tela de acesso. -->
+            <h1 style="font-size: 1.5rem; margin-top: 10px;">MedCore Acesso</h1>
+
+            <!-- Orientação para o usuário inserir seus dados de identificação. -->
+            <p style="color: var(--text-muted); font-size: 0.85rem;">Entre com suas credenciais do sistema</p>
+        </div>
+
+        <!-- Formulário enviado ao Flask pelo método POST, utilizando a rota de login. -->
+        <form method="POST" action="{{ url_for('login') }}" class="form-grid">
+
+            <!-- Campo destinado à identificação do usuário no sistema. -->
+            <div class="form-group">
+                <label>Identificação (Usuário / CPF / CRM)</label>
+                <input type="text" name="usuario" placeholder="Digite seu registro..." required>
+            </div>
+
+            <!-- Permite selecionar o perfil de acesso correspondente ao usuário. -->
+            <div class="form-group">
+                <label>Selecione seu Perfil</label>
+                <select name="perfil" required>
+                    <option value="">Selecione...</option>
+                    <option value="paciente">👤 Paciente</option>
+                    <option value="medico">🩺 Médico(a)</option>
+                    <option value="enfermeira">💉 Enfermeira(o)</option>
+                </select>
+            </div>
+
+            <!-- Botão responsável por enviar os dados preenchidos para a rota de login. -->
+            <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Entrar no Sistema</button>
+        </form>
+    </div>
+</body>
+</html>
