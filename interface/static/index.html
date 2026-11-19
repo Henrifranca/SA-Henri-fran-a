@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema Hospitalar - Painel Web</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>🏥 Sistema Hospitalar - Painel de Controle</h1>
+        <p>Projeto de Desenvolvimento de Sistemas - SENAI</p>
+    </header>
+
+    <div class="container">
+        <!-- COLUNA DA ESQUERDA: FORMULÁRIOS DE CADASTRO -->
+        <div class="col">
+            <div class="card">
+                <h2>➕ Novo Paciente</h2>
+                <form action="/cadastrar_paciente" method="POST">
+                    <label>Nome:</label>
+                    <input type="text" name="nome" required>
+                    
+                    <label>Idade:</label>
+                    <input type="number" name="idade" required>
+                    
+                    <label>Sintoma / Doença:</label>
+                    <input type="text" name="sintoma" required>
+                    
+                    <label>Gravidade (1 a 5):</label>
+                    <input type="number" name="nivel" min="1" max="5" required>
+                    
+                    <button type="submit">Cadastrar Paciente</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>➕ Novo Médico</h2>
+                <form action="/cadastrar_medico" method="POST">
+                    <label>Nome:</label>
+                    <input type="text" name="nome" required>
+                    
+                    <label>Especialidade:</label>
+                    <input type="text" name="especialidade" required>
+                    
+                    <button type="submit">Cadastrar Médico</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- COLUNA DA DIREITA: LISTAGENS -->
+        <div class="col">
+            <div class="card">
+                <h2>📋 Pacientes Cadastrados</h2>
+                {% if pacientes %}
+                    <ul>
+                        {% for p in pacientes %}
+                            <li><strong>{{ p.nome }}</strong> ({{ p.idade }} anos) - <em>{{ p.sintoma }}</em> | Nível: <strong>{{ p.nivel }}</strong></li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="empty">Nenhum paciente cadastrado no momento.</p>
+                {% endif %}
+            </div>
+
+            <div class="card">
+                <h2>🩺 Médicos Cadastrados</h2>
+                {% if medicos %}
+                    <ul>
+                        {% for m in medicos %}
+                            <li>Dr(a). <strong>{{ m.nome }}</strong> — <em>{{ m.especialidade }}</em></li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <p class="empty">Nenhum médico cadastrado no momento.</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

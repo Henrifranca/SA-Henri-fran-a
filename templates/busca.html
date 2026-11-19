@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Buscar — Sistema Hospitalar{% endblock %}
+{% block content %}
+<section class="painel">
+<h2>Buscar cadastros</h2>
+<form method="get" action="{{ url_for('buscar') }}" class="busca">
+  <select name="tipo"><option value="paciente" {% if tipo=="paciente" %}selected{% endif %}>Paciente por nome</option><option value="medico" {% if tipo=="medico" %}selected{% endif %}>Médico por nome/especialidade</option></select>
+  <input name="q" value="{{ termo }}" placeholder="Digite sua busca">
+  <button>Buscar</button>
+</form>
+{% if termo %}
+<h3>Resultados</h3>
+{% if resultados %}
+{% for item in resultados %}
+{% if tipo=="medico" %}<p><strong>{{ item.nome }}</strong> — {{ item.especialidade }} (ID {{ item.id }})</p>
+{% else %}<p><strong>{{ item.nome }}</strong> — idade {{ item.idade }}, sintoma: {{ item.sintoma }}, gravidade {{ item.nivel }} (ID {{ item.id }})</p>{% endif %}
+{% endfor %}
+{% else %}<p class="muted">Nenhum resultado encontrado.</p>{% endif %}
+{% endif %}
+</section>
+{% endblock %}

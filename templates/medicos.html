@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% block title %}Área Médica • MedCore{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>Corpo Médico & Especialistas</h1>
+        <p>Gerencie os profissionais de saúde e consulte escalas de atendimento.</p>
+    </div>
+</div>
+
+<div class="split-layout">
+    <!-- Cadastro de Médico -->
+    <section class="card">
+        <h2><i class="fa-solid fa-stethoscope" style="color: var(--teal);"></i> Cadastrar Médico</h2>
+        <form method="POST" action="{{ url_for('medicos') }}" class="form-grid">
+            <div class="form-group">
+                <label>Nome do(a) Médico(a)</label>
+                <input type="text" name="nome" placeholder="Dr(a). Roberto Santos" required>
+            </div>
+            <div class="form-group">
+                <label>CRM</label>
+                <input type="text" name="crm" placeholder="CRM/SP 987654" required>
+            </div>
+            <div class="form-group">
+                <label>Especialidade Principal</label>
+                <select name="especialidade" required>
+                    <option value="">Selecione a especialidade...</option>
+                    <option value="Clínica Geral">🩺 Clínica Geral</option>
+                    <option value="Cardiologia">❤️ Cardiologia</option>
+                    <option value="Ortopedia">🦴 Ortopedia</option>
+                    <option value="Pediatria">👶 Pediatria</option>
+                    <option value="Neurologia">🧠 Neurologia</option>
+                    <option value="Dermatologia">✨ Dermatologia</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-teal">
+                <i class="fa-solid fa-user-doctor"></i> Registrar Médico
+            </button>
+        </form>
+    </section>
+
+    <!-- Listagem do Corpo Clínico -->
+    <section class="card">
+        <div class="card-header-flex" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2><i class="fa-solid fa-user-doctor" style="color: var(--teal);"></i> Profissionais Ativos</h2>
+            <span class="badge" style="background: #ccfbf1; color: #0d9488;">{{ medicos|length }} Médicos</span>
+        </div>
+
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Profissional</th>
+                        <th>CRM</th>
+                        <th>Especialidade</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for m in medicos %}
+                    <tr>
+                        <td>
+                            <strong>{{ m.nome }}</strong>
+                        </td>
+                        <td><span class="code-pill">{{ m.crm }}</span></td>
+                        <td>
+                            <span class="badge" style="background: #f1f5f9; color: #334155;">
+                                {{ m.especialidade }}
+                            </span>
+                        </td>
+                        <td>
+                            <span class="badge badge-success">Disponível</span>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4" class="empty-state">
+                            <i class="fa-solid fa-user-slash" style="font-size: 2rem; margin-bottom: 8px; color: var(--text-muted);"></i>
+                            <p>Nenhum médico cadastrado no sistema.</p>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+{% endblock %}

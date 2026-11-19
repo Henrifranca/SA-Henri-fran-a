@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Exames • MedCore{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <div>
+        <h1>Gestão de Exames</h1>
+        <p>Solicitações de exames laboratoriais e de imagem.</p>
+    </div>
+</div>
+
+<div class="split-layout">
+    <section class="card">
+        <h2><i class="fa-solid fa-microscope"></i> Novo Exame</h2>
+        <form method="POST" action="{{ url_for('exames') }}" class="form-grid">
+            <div class="form-group">
+                <label>Nome do Exame</label>
+                <input type="text" name="nome_exame" placeholder="Ex: Hemograma Completo" required>
+            </div>
+            <div class="form-group">
+                <label>CPF do Paciente</label>
+                <input type="text" name="cpf_paciente" placeholder="000.000.000-00" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Solicitar Exame</button>
+        </form>
+    </section>
+
+    <section class="card">
+        <h2><i class="fa-solid fa-list-check"></i> Exames Solicitados</h2>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Exame</th>
+                        <th>Paciente</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for e in exames %}
+                    <tr>
+                        <td>{{ e.nome }}</td>
+                        <td>{{ e.paciente }}</td>
+                        <td><span class="badge badge-success">Pendente</span></td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="3" class="empty-state">Nenhum exame cadastrado.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+</div>
+{% endblock %}  

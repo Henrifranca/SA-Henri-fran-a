@@ -1,0 +1,9 @@
+{
+    "contador_id_paciente": 2,
+    "contador_id_medico": 1,
+    "contador_id_exame": 1,
+    "medicos": [],
+    "pacientes": [],
+    "exames": [],
+    "historico_ajuda": []
+}
