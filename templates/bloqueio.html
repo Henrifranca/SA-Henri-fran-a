@@ -1,0 +1,22 @@
+    {% extends "base.html" %}
+{% block title %}Acesso Negado • MedCore{% endblock %}
+
+{% block content %}
+<div class="card" style="max-width: 500px; margin: 40px auto; text-align: center; padding: 40px 30px;">
+    <div style="font-size: 3.5rem; color: #e11d48; margin-bottom: 16px;">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+    </div>
+    
+    <h1 style="font-size: 1.5rem; margin-bottom: 10px; color: var(--text-main);">Acesso Restrito</h1>
+    
+    <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; margin-bottom: 24px;">
+        Desculpe, mas o seu perfil de <strong>Paciente</strong> não tem permissão para acessar a tela de Triagem & Ajuda. Esta área é exclusiva para o suporte operacional e equipe de atendimento.
+    </p>
+
+    <div style="display: flex; justify-content: center; gap: 12px;">
+        <a href="{{ url_for('exames') }}" class="btn btn-primary" style="text-decoration: none;">
+            <i class="fa-solid fa-arrow-left"></i> Ir para Meus Exames
+        </a>
+    </div>
+</div>
+{% endblock %}
